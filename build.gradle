@@ -11,27 +11,17 @@ allprojects {
 subprojects {
 	// ./gradlew publish -PpublishUrl=XXX -PpublishUser=YYY -PpublishPassword=ZZZ
 	plugins.withId("maven-publish") {
-		publishing {
-			repositories {
-				maven {
-					name = "releaseRepo"
-					url = uri(findProperty("publishUrl"))
-					credentials {
-						username = findProperty("publishUser")
-						password = findProperty("publishPassword")
+		if (findProperty("publishUrl")) {
+			publishing {
+				repositories {
+					maven {
+						name = "releaseRepo"
+						url = uri(findProperty("publishUrl"))
+						credentials {
+							username = findProperty("publishUser")
+							password = findProperty("publishPassword")
+						}
 					}
-				}
-			}
-		}
-
-		repositories {
-			maven {
-				name = "releaseRepo"
-				url = uri(findProperty("publishUrl"))
-
-				credentials {
-					username = findProperty("publishUser")
-					password = findProperty("publishPassword")
 				}
 			}
 		}
