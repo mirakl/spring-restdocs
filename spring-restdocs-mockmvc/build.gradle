@@ -7,6 +7,10 @@ plugins {
 
 description = "Spring REST Docs MockMvc"
 
+configurations.all {
+	exclude group: "tools.jackson"
+}
+
 dependencies {
 	api(project(":spring-restdocs-core"))
 	api("org.springframework:spring-webmvc")
